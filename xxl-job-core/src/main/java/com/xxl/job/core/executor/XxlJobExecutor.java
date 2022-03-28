@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
+ * xxljob执行器
  * Created by xuxueli on 2016/3/2 21:14.
  */
 public class XxlJobExecutor  {
@@ -67,17 +68,17 @@ public class XxlJobExecutor  {
     // ---------------------- start + stop ----------------------
     public void start() throws Exception {
 
-        // init logpath
+        // init logpath 初始化日志存储路径
         XxlJobFileAppender.initLogPath(logPath);
 
-        // init invoker, admin-client
+        // init invoker, admin-client 初始化客户端地址
         initAdminBizList(adminAddresses, accessToken);
 
 
-        // init JobLogFileCleanThread
+        // init JobLogFileCleanThread  清理任务日志时间周期(不能小于三天)
         JobLogFileCleanThread.getInstance().start(logRetentionDays);
 
-        // init TriggerCallbackThread
+        // init TriggerCallbackThread  启动回调线程
         TriggerCallbackThread.getInstance().start();
 
         // init executor-server
@@ -115,6 +116,7 @@ public class XxlJobExecutor  {
 
 
     // ---------------------- admin-client (rpc invoker) ----------------------
+    // ---------------------- 初始化管理客户端地址 ----------------------
     private static List<AdminBiz> adminBizList;
     private void initAdminBizList(String adminAddresses, String accessToken) throws Exception {
         if (adminAddresses!=null && adminAddresses.trim().length()>0) {
@@ -140,7 +142,7 @@ public class XxlJobExecutor  {
 
     private void initEmbedServer(String address, String ip, int port, String appname, String accessToken) throws Exception {
 
-        // fill ip port
+        // fill ip port 配置IP + 端口，未配置端口使用默认端口9999(端口可用筛选)
         port = port>0?port: NetUtil.findAvailablePort(9999);
         ip = (ip!=null&&ip.trim().length()>0)?ip: IpUtil.getIp();
 

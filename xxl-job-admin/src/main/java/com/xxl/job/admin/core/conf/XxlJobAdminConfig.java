@@ -31,7 +31,7 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
     // ---------------------- XxlJobScheduler ----------------------
 
     private XxlJobScheduler xxlJobScheduler;
-
+    // 在bean初始化后 -> 赋值之后
     @Override
     public void afterPropertiesSet() throws Exception {
         adminConfig = this;
@@ -40,6 +40,7 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
         xxlJobScheduler.init();
     }
 
+    // bean销毁回调
     @Override
     public void destroy() throws Exception {
         xxlJobScheduler.destroy();

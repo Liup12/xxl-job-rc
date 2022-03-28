@@ -21,16 +21,20 @@ public class XxlJobScheduler  {
 
 
     public void init() throws Exception {
-        // init i18n
+        // init i18n 国际化初始化
         initI18n();
 
         // admin trigger pool start
+        // 初始化定时任务调度器线程池
         JobTriggerPoolHelper.toStart();
 
         // admin registry monitor run
+        // 任务注册中心初始化, 初始化registryOrRemoveThreadPool、registryMonitorThread
+        // 启动守护线程：离线的执行器（三次心跳超时），执行器分组
         JobRegistryHelper.getInstance().start();
 
         // admin fail-monitor run
+        // 失败重试定时器（失败告警）
         JobFailMonitorHelper.getInstance().start();
 
         // admin lose-monitor run ( depend on JobTriggerPoolHelper )

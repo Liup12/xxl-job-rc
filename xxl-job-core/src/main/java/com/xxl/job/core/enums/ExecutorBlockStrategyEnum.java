@@ -4,10 +4,12 @@ package com.xxl.job.core.enums;
  * Created by xuxueli on 17/5/9.
  */
 public enum ExecutorBlockStrategyEnum {
-
+    // 单机串行
     SERIAL_EXECUTION("Serial execution"),
     /*CONCURRENT_EXECUTION("并行"),*/
+    // 稍后丢弃
     DISCARD_LATER("Discard Later"),
+    // 覆盖之前调度
     COVER_EARLY("Cover Early");
 
     private String title;

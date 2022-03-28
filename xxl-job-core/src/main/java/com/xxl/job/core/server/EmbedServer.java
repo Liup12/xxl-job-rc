@@ -162,13 +162,13 @@ public class EmbedServer {
             bizThreadPool.execute(new Runnable() {
                 @Override
                 public void run() {
-                    // do invoke
+                    // do invoke 执行请求
                     Object responseObj = process(httpMethod, uri, requestData, accessTokenReq);
 
-                    // to json
+                    // to json 转换响应为json
                     String responseJson = GsonTool.toJson(responseObj);
 
-                    // write response
+                    // write response 写入响应流
                     writeResponse(ctx, keepAlive, responseJson);
                 }
             });

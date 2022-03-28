@@ -16,7 +16,7 @@ public class NetUtil {
 
     /**
      * find avaliable port
-     *
+     * 从9999到65535查询未被使用的端口,未找到就从9998到0查找
      * @param defaultPort
      * @return
      */
